@@ -4,7 +4,7 @@
 // A critter, in this context, is an animal that may fall from the trees
 // due to various forms of emotional distress.
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 /**
  * Populates an entity type struct with information about the critter entity.

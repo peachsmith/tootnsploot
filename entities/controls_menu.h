@@ -4,7 +4,7 @@
 // The controls menu for Toot n Sploot.
 // This menu explains how to play the game.
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 /**
  * Populates an entity type struct with information about the controls menu

@@ -1,7 +1,7 @@
 #ifndef COMMON_DIALOG_H
 #define COMMON_DIALOG_H
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 // #define COMMON_MAX_DIALOGS 10
 #define COMMON_DIALOG_BUFSIZE 256

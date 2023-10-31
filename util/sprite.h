@@ -1,7 +1,7 @@
 #ifndef TNS_SPRITE_H
 #define TNS_SPRITE_H
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 /**
  * Renders the corgi character.

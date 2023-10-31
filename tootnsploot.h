@@ -1,12 +1,12 @@
 #ifndef TNS_H
 #define TNS_H
 
-#include "crumbs.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+
+#include <crumbs/crumbs.h>
 
 // image assets
 #define TNS_TEXTURE_UI 0

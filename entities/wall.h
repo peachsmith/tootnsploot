@@ -3,7 +3,7 @@
 
 // A wall functions as a barrier restricting certain entities movement.
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 /**
  * Populates an entity type struct with information about the wall entity.

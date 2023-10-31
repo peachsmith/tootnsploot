@@ -1,7 +1,7 @@
 #ifndef TNS_SCENES_H
 #define TNS_SCENES_H
 
-#include "crumbs.h"
+#include "tootnsploot.h"
 
 // scenes
 #define TNS_SCENE_TITLE_SCREEN 0
