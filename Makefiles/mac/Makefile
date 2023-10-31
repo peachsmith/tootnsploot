@@ -4,8 +4,14 @@
 
 CC=clang
 
-INCLUDE_DIR=-I/Library/Frameworks/SDL2.framework/Headers -I$(CRUMBS_HOME)/include -I../..
-LINK_DIR=-F/Library/Frameworks -L$(CRUMBS_HOME)/lib
+# This file expects SDL2 to be installed on the system.
+# For example, SDL2 could be built from source and installed in
+# /usr/local/lib with the actual headers in /usr/local/include,or it could be
+# installed in /Library/Frameworks and the headers in /usr/local/include could
+# be symbolic links to to headers in the frameworks.
+
+INCLUDE_DIR=-I../..
+LINK_DIR=-F/Library/Frameworks
 
 CFLAGS=-Wall -Werror
 LIBS=-lcrumbs -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer
