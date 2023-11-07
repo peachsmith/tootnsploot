@@ -56,6 +56,36 @@ static void default_input_handler(cr_app *app)
 {
 }
 
+static int should_update(cr_app *app, cr_entity *ent)
+{
+    cr_entity_func update = app->entity_types[ent->type].update;
+    int pause_flag = cr_check_flag(ent, ENTITY_FLAG_PAUSE);
+    int menu_flag = cr_check_flag(ent, ENTITY_FLAG_MENU);
+
+    if (!ent->present || update == NULL)
+        return 0;
+
+    if (app->pause)
+        return pause_flag && !menu_flag;
+    
+    return !pause_flag;
+}
+
+static int should_render(cr_app *app, cr_entity *ent)
+{
+    cr_entity_func render = app->entity_types[ent->type].render;
+    int pause_flag = cr_check_flag(ent, ENTITY_FLAG_PAUSE);
+    int menu_flag = cr_check_flag(ent, ENTITY_FLAG_MENU);
+
+    if (!ent->present || render == NULL)
+        return 0;
+
+    if (app->pause)
+        return !menu_flag;
+
+    return !pause_flag && !menu_flag;
+}
+
 /**
  * Implmentation of the update function.
  *
@@ -112,21 +142,9 @@ static void update(cr_app *app)
     {
         cr_entity *ent = &(app->entities[i]);
         cr_entity_type t = app->entity_types[ent->type];
-        int pause_flag = cr_check_flag(ent, ENTITY_FLAG_PAUSE);
-        int menu_flag = cr_check_flag(ent, ENTITY_FLAG_MENU);
-        if (ent->present && t.update != NULL)
+        if (should_update(app, ent))
         {
-            if (app->pause)
-            {
-                if (pause_flag && !menu_flag)
-                {
-                    t.update(app, ent);
-                }
-            }
-            else if (!pause_flag)
-            {
-                t.update(app, ent);
-            }
+            t.update(app, ent);
         }
     }
 
@@ -167,25 +185,9 @@ static void draw(cr_app *app)
     {
         cr_entity *ent = &(app->entities[i]);
         cr_entity_type t = app->entity_types[ent->type];
-        int pause_flag = cr_check_flag(ent, ENTITY_FLAG_PAUSE);
-        int menu_flag = cr_check_flag(ent, ENTITY_FLAG_MENU);
-        if (ent->present && t.render != NULL)
+        if (should_render(app, ent))
         {
-            // We render all entities without the pause flag, regardless of
-            // whether or not the application is paused.
-            // However, entities that have the pause flag will only be
-            // rendered if the application is paused.
-            if (app->pause)
-            {
-                if (!menu_flag)
-                {
-                    t.render(app, ent);
-                }
-            }
-            else if (!pause_flag && !menu_flag)
-            {
-                t.render(app, ent);
-            }
+            t.render(app, ent);
         }
     }
 
